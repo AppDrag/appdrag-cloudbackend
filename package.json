@@ -1,0 +1,18 @@
+{
+  "name": "appdrag-cloudbackend",
+  "version": "1.0.0",
+  "description": "AppDrag CloudBackend SDK for JavaScript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AppDrag/appdrag-cloudbackend.git"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "dependencies" : {
+    "request": "2.83.1"
+  },
+  "author": "AppDrag",
+  "license": "ISC"
+}
