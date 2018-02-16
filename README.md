@@ -21,7 +21,6 @@ Once the package is installed your can require it and Initialize it with your **
 
 ![CloudBackend API Dashboard](https://cf.appdrag.com/cloudbackend/assets/AppDrag-API-Dashboard.png "CloudBackend API Dashboard")
 
-<br/>
 
 ### Installing with NPM
 The preferred way to install the CloudBackend SDK for Node.js is to use the npm package manager for Node.js. Simply type the following into a terminal window:
