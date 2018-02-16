@@ -35,6 +35,7 @@ If your are inside a cloud function in CloudBackend, click on the "Open library 
 ![CloudBackend API Dashboard](https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg "CloudBackend NPM Manager")
 
 <br/>
+
 ## Initialization
 ```
 var cloudbackend = require('appdrag-cloudbackend');
@@ -42,6 +43,7 @@ appdrag.init('your_api_key', 'your_app_id');
 ```
 
 <br/>
+
 ## SQL
 ### sqlSelect(query)
 ```
