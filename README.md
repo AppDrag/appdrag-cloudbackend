@@ -4,7 +4,7 @@
 
 This is the official CloudBackend SDK for JavaScript, available for browsers and mobile devices, or Node.js backends. It is actively maintained by [AppDrag](https://appdrag.com "AppDrag") directly. AppDrag is a Cloud CMS & Backend made for web professionals and hosted on Amazon AWS. With AppDrag produce 5 times faster websites, blog e-commerce, Databases & API's.
 
-### Features if this package
+### Features in this package
 - Cloud Database: Execute SQL Queries and Non-queries
 - Cloud FileSystem: Write & upload files, create/rename/delete/list files and folders
 <br/>
