@@ -27,13 +27,14 @@ Once the package is installed your can require it and Initialize it with your **
 The preferred way to install the CloudBackend SDK for Node.js is to use the npm package manager for Node.js. Simply type the following into a terminal window:
 
 `$ npm install appdrag-cloudbackend`
-<br/>
+<br/><br/>
 
 ### Installing with CloudBackend
 If your are inside a cloud function in CloudBackend, click on the "Open library manager" button then check the last checkbox named "appdrag-cloudbackend" then save.
 
 ![CloudBackend API Dashboard](https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg "CloudBackend NPM Manager")
 
+<br/>
 <br/>
 
 ## Initialization
@@ -61,6 +62,7 @@ appdrag.sqlExecuteRawQuery("UPDATE Products SET qty = qte - 1 WHERE id = 54").th
 ```
 
 You can also use sqlExecuteRawQuery to create tables, add an index or anything you can do with a regular MySQL database.
+<br/>
 <br/>
 
 ## Filesystem
