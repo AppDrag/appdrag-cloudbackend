@@ -3,14 +3,14 @@ This is the official CloudBackend SDK for JavaScript, available for browsers and
 
 AppDrag is a Cloud CMS & Backend made for web professionals. With AppDrag produce 5 times faster websites, blog e-commerce, databases, apis, ...
 
-###Features if this package
+### Features if this package
 - Cloud Database access
 - Cloud FileSystem access
 <br/>
 
-#Getting Started
+# Getting Started
 
-###Obtain an API Key and AppID
+### Obtain an API Key and AppID
 
 Once the package is installed your can require it and Initialize it with your **API Key **&** AppID**. You can find your AppID and API Key in **CloudBackend Portal**:
 
@@ -23,27 +23,27 @@ Once the package is installed your can require it and Initialize it with your **
 
 <br/>
 
-###Installing with NPM
+### Installing with NPM
 The preferred way to install the CloudBackend SDK for Node.js is to use the npm package manager for Node.js. Simply type the following into a terminal window:
 
 `$ npm install appdrag-cloudbackend`
 <br/>
 
-###Installing with CloudBackend
+### Installing with CloudBackend
 If your are inside a cloud function in CloudBackend, click on the "Open library manager" button then check the last checkbox named "appdrag-cloudbackend" then save.
 
 ![CloudBackend API Dashboard](https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg "CloudBackend NPM Manager")
 
 <br/>
-##Initialization
+## Initialization
 ```
 var cloudbackend = require('appdrag-cloudbackend');
 appdrag.init('your_api_key', 'your_app_id');
 ```
 
 <br/>
-##SQL
-###sqlSelect(query)
+## SQL
+### sqlSelect(query)
 ```
 appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software' LIMIT 5")
 .then( function(response) {
@@ -51,7 +51,7 @@ appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software' LIMIT 5")
 });
 ```
 
-###sqlExecuteRawQuery(query)
+### sqlExecuteRawQuery(query)
 ```
 appdrag.sqlExecuteRawQuery("UPDATE Products SET qty = qte - 1 WHERE id = 54").then( function(response) {
 		console.log(response);
@@ -61,36 +61,36 @@ appdrag.sqlExecuteRawQuery("UPDATE Products SET qty = qte - 1 WHERE id = 54").th
 You can also use sqlExecuteRawQuery to create tables, add an index or anything you can do with a regular MySQL database.
 <br/>
 
-##Filesystem
-###fileTextWrite(filekey, content)
+## Filesystem
+### fileTextWrite(filekey, content)
 ```
 appdrag.fileTextWrite("mysubfolder/testfile1.html", "this is the content to save")
 .then( function(response) {
 		console.log(response);
 });
 ```
-###fileDelete(filekey)
+### fileDelete(filekey)
 ```
 appdrag.fileDelete("mysubfolder/testfile1.html")
 .then( function(response) {
 		console.log(response);
 });
 ```
-###fileRename(filekey, destkey)
+### fileRename(filekey, destkey)
 ```
 appdrag.fileRename("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
 .then( function(response) {
 		console.log(response);
 });
 ```
-###fileCopy(filekey, destkey)
+### fileCopy(filekey, destkey)
 ```
 appdrag.fileCopy("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
 .then( function(response) {
 		console.log(response);
 });
 ```
-###fileSaveUploaded(tmpfilekey, destkey)
+### fileSaveUploaded(tmpfilekey, destkey)
 This special function must be called to save a file uploaded to a cloud function in the CloudBackend storage for that AppID. in the destkey you can either indicate a destination path of your choice or use the original filename.
 ```
 appdrag.fileSaveUploaded( event["FILES"][0]["path"], "newfilename.jpg").then( function(response) {
@@ -98,7 +98,7 @@ appdrag.fileSaveUploaded( event["FILES"][0]["path"], "newfilename.jpg").then( fu
 });
 ```
 
-###downloadRemoteFile(url, destkey)
+### downloadRemoteFile(url, destkey)
 Download a remote file from it's URL and save it inside CloudBackend filesystem
 ```
 appdrag.downloadRemoteFile("https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg", "img1.jpg").then( function(response) {
@@ -106,7 +106,7 @@ appdrag.downloadRemoteFile("https://cf.appdrag.com/cloudbackend/assets/AppDrag-C
 });
 ```
 
-###directoryCreate(directoryPath)
+### directoryCreate(directoryPath)
 Create a subfolder at directoryPath (can contains subdirectories like subdir1/subdir2/...)
 ```
 appdrag.directoryCreate("subfolder1").then( function(response) {
@@ -114,7 +114,7 @@ appdrag.directoryCreate("subfolder1").then( function(response) {
 });
 ```
 
-###directoryList(directoryPath)
+### directoryList(directoryPath)
 List all files and subdirectories of the specified directoryPath
 ```
 appdrag.directoryList("subfolder1").then( function(response) {
@@ -122,14 +122,14 @@ appdrag.directoryList("subfolder1").then( function(response) {
 });
 ```
 
-###directoryRename(directoryPath, destDirectoryPath)
+### directoryRename(directoryPath, destDirectoryPath)
 ```
 appdrag.directoryRename("subfolder1", "subfolder2").then( function(response) {
 		console.log(response);
 });
 ```
 
-###directoryDelete(directoryPath)
+### directoryDelete(directoryPath)
 ```
 appdrag.directoryDelete("subfolder1")
 .then( function(response) {
@@ -141,7 +141,7 @@ appdrag.directoryDelete("subfolder1")
 
 
 
-#Support
+# Support
 Post your issues or suggestions here on Github
 
 You can also check our documentation here: 
