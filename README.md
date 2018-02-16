@@ -1,4 +1,5 @@
 # appdrag-cloudbackend
+  
 This is the official CloudBackend SDK for JavaScript, available for browsers and mobile devices, or Node.js backends. It is actively maintained by [AppDrag](https://appdrag.com "AppDrag") directly.
 
 AppDrag is a Cloud CMS & Backend made for web professionals. With AppDrag produce 5 times faster websites, blog e-commerce, databases, apis, ...
@@ -18,9 +19,9 @@ Once the package is installed your can require it and Initialize it with your **
 - Login if you are not already logged in, or create a free account
 - Select an existing project or create a new one
 - In the left menu click on **API**
+- There you will find your AppID in the top left corner, and the APIKey will appear when you press the APIKey button
 
 ![CloudBackend API Dashboard](https://cf.appdrag.com/cloudbackend/assets/AppDrag-API-Dashboard.png "CloudBackend API Dashboard")
-
 
 ### Installing with NPM
 The preferred way to install the CloudBackend SDK for Node.js is to use the npm package manager for Node.js. Simply type the following into a terminal window:
@@ -33,8 +34,7 @@ If your are inside a cloud function in CloudBackend, click on the "Open library 
 
 ![CloudBackend API Dashboard](https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg "CloudBackend NPM Manager")
 
-<br/>
-<br/>
+<br/><br/>
 
 ## Initialization
 ```
@@ -47,7 +47,7 @@ appdrag.init('your_api_key', 'your_app_id');
 ## SQL
 ### sqlSelect(query)
 ```
-appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software' LIMIT 5")
+appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software'")
 .then( function(response) {
 		console.log(response);
 });
@@ -55,7 +55,7 @@ appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software' LIMIT 5")
 
 ### sqlExecuteRawQuery(query)
 ```
-appdrag.sqlExecuteRawQuery("UPDATE Products SET qty = qte - 1 WHERE id = 54").then( function(response) {
+appdrag.sqlExecuteRawQuery("UPDATE Products SET qty = qty - 1, lastUpdate = NOW() WHERE id = 54").then( function(response) {
 		console.log(response);
 });
 ```
