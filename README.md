@@ -39,7 +39,7 @@ If your are inside a cloud function in CloudBackend, click on the "Open library 
 ## Initialization
 ```
 var cloudbackend = require('appdrag-cloudbackend');
-appdrag.init('your_api_key', 'your_app_id');
+cloudbackend.init('your_api_key', 'your_app_id');
 ```
 
 <br/>
@@ -47,7 +47,7 @@ appdrag.init('your_api_key', 'your_app_id');
 ## SQL
 ### sqlSelect(query)
 ```
-appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software'")
+cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = 'Software'")
 .then( function(response) {
 		console.log(response);
 });
@@ -55,7 +55,7 @@ appdrag.sqlSelect("SELECT * FROM Products WHERE category = 'Software'")
 
 ### sqlExecuteRawQuery(query)
 ```
-appdrag.sqlExecuteRawQuery("UPDATE Products SET qty = qty - 1, lastUpdate = NOW() WHERE id = 54").then( function(response) {
+cloudbackend.sqlExecuteRawQuery("UPDATE Products SET qty = qty - 1, lastUpdate = NOW() WHERE id = 54").then( function(response) {
 		console.log(response);
 });
 ```
@@ -67,28 +67,28 @@ You can also use sqlExecuteRawQuery to create tables, add an index or anything y
 ## Filesystem
 ### fileTextWrite(filekey, content)
 ```
-appdrag.fileTextWrite("mysubfolder/testfile1.html", "this is the content to save")
+cloudbackend.fileTextWrite("mysubfolder/testfile1.html", "this is the content to save")
 .then( function(response) {
 		console.log(response);
 });
 ```
 ### fileDelete(filekey)
 ```
-appdrag.fileDelete("mysubfolder/testfile1.html")
+cloudbackend.fileDelete("mysubfolder/testfile1.html")
 .then( function(response) {
 		console.log(response);
 });
 ```
 ### fileRename(filekey, destkey)
 ```
-appdrag.fileRename("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
+cloudbackend.fileRename("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
 .then( function(response) {
 		console.log(response);
 });
 ```
 ### fileCopy(filekey, destkey)
 ```
-appdrag.fileCopy("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
+cloudbackend.fileCopy("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
 .then( function(response) {
 		console.log(response);
 });
@@ -96,7 +96,7 @@ appdrag.fileCopy("mysubfolder/testfile1.html", "mysubfolder/testfile2.html")
 ### fileSaveUploaded(tmpfilekey, destkey)
 This special function must be called to save a file uploaded to a cloud function in the CloudBackend storage for that AppID. in the destkey you can either indicate a destination path of your choice or use the original filename.
 ```
-appdrag.fileSaveUploaded( event["FILES"][0]["path"], "newfilename.jpg").then( function(response) {
+cloudbackend.fileSaveUploaded( event["FILES"][0]["path"], "newfilename.jpg").then( function(response) {
 		console.log(response);
 });
 ```
@@ -104,7 +104,7 @@ appdrag.fileSaveUploaded( event["FILES"][0]["path"], "newfilename.jpg").then( fu
 ### downloadRemoteFile(url, destkey)
 Download a remote file from it's URL and save it inside CloudBackend filesystem
 ```
-appdrag.downloadRemoteFile("https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg", "img1.jpg").then( function(response) {
+cloudbackend.downloadRemoteFile("https://cf.appdrag.com/cloudbackend/assets/AppDrag-Cloudbackend-API-NPM-Manager.jpg", "img1.jpg").then( function(response) {
 		console.log(response);
 });
 ```
@@ -112,7 +112,7 @@ appdrag.downloadRemoteFile("https://cf.appdrag.com/cloudbackend/assets/AppDrag-C
 ### directoryCreate(directoryPath)
 Create a subfolder at directoryPath (can contains subdirectories like subdir1/subdir2/...)
 ```
-appdrag.directoryCreate("subfolder1").then( function(response) {
+cloudbackend.directoryCreate("subfolder1").then( function(response) {
 		console.log(response);
 });
 ```
@@ -120,21 +120,21 @@ appdrag.directoryCreate("subfolder1").then( function(response) {
 ### directoryList(directoryPath)
 List all files and subdirectories of the specified directoryPath
 ```
-appdrag.directoryList("subfolder1").then( function(response) {
+cloudbackend.directoryList("subfolder1").then( function(response) {
 		console.log(response);
 });
 ```
 
 ### directoryRename(directoryPath, destDirectoryPath)
 ```
-appdrag.directoryRename("subfolder1", "subfolder2").then( function(response) {
+cloudbackend.directoryRename("subfolder1", "subfolder2").then( function(response) {
 		console.log(response);
 });
 ```
 
 ### directoryDelete(directoryPath)
 ```
-appdrag.directoryDelete("subfolder1")
+cloudbackend.directoryDelete("subfolder1")
 .then( function(response) {
 		console.log(response);
 });
