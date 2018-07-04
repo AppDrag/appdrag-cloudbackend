@@ -196,6 +196,31 @@ exports.directoryDelete = function (directoryName) {
   });
 }
 
+exports.sendEmail = function (from, sender, to, subject, content, isHtml) {
+  return new Promise((resolve, reject) => {
+    var postParameters = {
+        "command" : "CloudAPISendEmail",
+        "APIKey" : APIKey,
+        "appID" : appID,
+        "from" : from,
+        "sender" : sender,
+        "to" : to,
+        "subject" : subject,
+        "content": content,
+        "isHtml": isHtml === true ? "1" : "0" 
+    };
+
+    request.post(
+    {
+        url:APIUrl,
+        form: postParameters
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+  });
+}
+
 exports.downloadRemoteFile = function (url, filekey) {
   return new Promise((resolve, reject) => {
     var postParameters = {
