@@ -64,6 +64,15 @@ You can also use sqlExecuteRawQuery to create tables, add an index or anything y
 <br/>
 <br/>
 
+## Email
+### sendEmail(from, sender, to, subject, content, isHtml)
+```
+cloudbackend.sendEmail("john.doe@gmail.com", "John Doe", "barbara.dess@gmail.com", "Hello", "How are you?", false)
+.then( function(response) {
+		console.log(response);
+});
+```
+
 ## Filesystem
 ### fileTextWrite(filekey, content)
 ```
