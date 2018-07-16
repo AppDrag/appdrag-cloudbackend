@@ -24,6 +24,9 @@ exports.fileTextWrite = function(filekey, content) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -44,6 +47,9 @@ exports.fileDelete = function (filekey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -65,6 +71,9 @@ exports.fileRename = function (filekey, destkey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -86,6 +95,9 @@ exports.fileCopy = function (filekey, destkey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -108,6 +120,9 @@ exports.fileSaveUploaded = function(filekey, destkey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -129,6 +144,9 @@ exports.directoryCreate = function (directoryName) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -149,6 +167,9 @@ exports.directoryList = function (directoryName) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -170,6 +191,9 @@ exports.directoryRename = function (directoryName, destDirectory) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -190,6 +214,9 @@ exports.directoryDelete = function (directoryName) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -207,7 +234,7 @@ exports.sendEmail = function (from, sender, to, subject, content, isHtml) {
         "to" : to,
         "subject" : subject,
         "content": content,
-        "isHtml": isHtml === true ? "1" : "0" 
+        "isHtml": isHtml === true ? "1" : "0"
     };
 
     request.post(
@@ -215,6 +242,9 @@ exports.sendEmail = function (from, sender, to, subject, content, isHtml) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -236,6 +266,9 @@ exports.downloadRemoteFile = function (url, filekey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -255,6 +288,9 @@ exports.sqlSelect = function (query) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
@@ -275,6 +311,9 @@ exports.sqlExecuteRawQuery = function (query) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
+        if (err) {
+          return reject(err);
+        }
         return resolve(body);
       }
     );
