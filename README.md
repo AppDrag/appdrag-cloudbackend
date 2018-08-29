@@ -71,8 +71,27 @@ You can also use sqlExecuteRawQuery to create tables, add an index or anything y
 ### sendEmail(from, sender, to, subject, content, isHtml)
 ```
 cloudbackend.sendEmail("john.doe@gmail.com", "John Doe", "barbara.dess@gmail.com", "Hello", "How are you?", false)
-.then( function(response) {
+.then(function(response) {
 		console.log(response);
+});
+```
+
+### sendEmailAdvanced(from, sender, to, cc, bcc, subject, content, attachments, isHtml)
+```
+var request = require('request').defaults({ encoding: null });
+var imgURL = "https://upload.wikimedia.org/wikipedia/en/0/0b/Nickelodeon_SpongeBob_SquarePants_Characters_Cast.png";
+
+
+request.get(imgURL, function (err, res, body) {
+  var attachments =[{
+    filename : "mypicture.jpg",
+    content: body
+  }];
+
+	cloudbackend.sendEmail("john.doe@gmail.com", "John Doe", "barbara.dess@gmail.com", "michel.ane@gmail.com;sarah.croche@gmail.com;jeremy.sciglio@gmail.com", "frank.spritz@gmail.com", "Hello", "How are you?", attachments, false)
+	.then(function(response) {
+			console.log(response);
+	});
 });
 ```
 

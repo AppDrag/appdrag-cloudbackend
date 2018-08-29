@@ -1,5 +1,4 @@
 var request = require('request');
-var FormData = require('form-data');
 var APIUrl = 'https://api.appdrag.com/CloudBackend.aspx';
 var APIKey = "";
 var appID = "";
@@ -31,26 +30,24 @@ exports.fileTextWrite = function(filekey, content) {
   });
 }
 
-exports.fileBinaryWrite = function(filekey, content) {
-
+exports.fileBinaryWrite = function (filekey, content) {
   return new Promise((resolve, reject) => {
-
-    var form = new FormData();
+    var r = request.post(
+    {
+        url:APIUrl
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+    var form = r.form();
     form.append('command', 'WriteBinaryFile');
     form.append('APIKey', APIKey);
     form.append('appID', appID);
     form.append('filekey', filekey);
     form.append('file', content, {filename : filekey});
-    var resp = form.submit(APIUrl, function (err, res, body) {
-      const chunks = [];
-
-      res.on('data', function(chunk) {
-         var textChunk = chunk.toString('utf8');
-         resolve(textChunk);
-      });
-    });
   });
 }
+
 
 exports.fileDelete = function (filekey) {
   return new Promise((resolve, reject) => {
@@ -217,6 +214,35 @@ exports.directoryDelete = function (directoryName) {
     );
   });
 }
+
+exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, content, attachments, isHtml) {
+  return new Promise((resolve, reject) => {
+
+    var r = request.post(
+    {
+        url:APIUrl
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+    var form = r.form();
+    form.append('command', 'CloudAPISendEmail');
+    form.append('APIKey', APIKey);
+    form.append('appID', appID);
+    form.append('from', from);
+    form.append('to', to);
+    form.append('cc', cc);
+    form.append('bcc', bcc);
+    form.append('subject', subject);
+    form.append('content', content);
+    form.append('isHtml', isHtml === true ? "1" : "0");
+    for (var i = 0; attachments != null && i < attachments.length; i++) {
+      var attachment = attachments[i];
+      form.append('file' + i, attachment.content, {filename : attachment.filename});
+    }
+  });
+}
+
 
 exports.sendEmail = function (from, sender, to, subject, content, isHtml) {
   return new Promise((resolve, reject) => {
