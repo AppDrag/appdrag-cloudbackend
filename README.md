@@ -86,7 +86,6 @@ cloudbackend.fileTextWrite("mysubfolder/testfile1.html", "this is the content to
 ```
 
 
-## Filesystem
 ### fileBinaryWrite(filekey, content)
 ```
 var request = require('request').defaults({ encoding: null });
