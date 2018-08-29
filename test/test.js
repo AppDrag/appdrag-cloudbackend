@@ -11,9 +11,11 @@ appdrag.init(process.env.APIKEY, process.env.APPID);
     }
 );*/
 var request = require('request').defaults({ encoding: null });
-request.get("https://cdn.vox-cdn.com/thumbor/Or0rhkc1ciDqjrKv73IEXGHtna0=/0x0:666x444/1200x800/filters:focal(273x193:379x299)/cdn.vox-cdn.com/uploads/chorus_image/image/59384673/Macaca_nigra_self-portrait__rotated_and_cropped_.0.jpg", function (err, res, body) {
+var imgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Macaca_sinica_-_01.jpg/220px-Macaca_sinica_-_01.jpg";
+var filename = "test.jpg";
+request.get(imgURL, function (err, res, body) {
 
-appdrag.fileBinaryWrite("wawa22.jpg", body).then( function(response) {
+appdrag.fileBinaryWrite(filename, body).then( function(response) {
         console.log(response);
     });
   });

@@ -84,6 +84,22 @@ cloudbackend.fileTextWrite("mysubfolder/testfile1.html", "this is the content to
 		console.log(response);
 });
 ```
+
+
+## Filesystem
+### fileBinaryWrite(filekey, content)
+```
+var request = require('request').defaults({ encoding: null });
+var imgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Macaca_sinica_-_01.jpg/220px-Macaca_sinica_-_01.jpg";
+var filename = "test.jpg";
+request.get(imgURL, function (err, res, body) {
+
+cloudbackend.fileBinaryWrite(filename, body).then( function(response) {
+        console.log(response);
+  });
+});
+```
+
 ### fileDelete(filekey)
 ```
 cloudbackend.fileDelete("mysubfolder/testfile1.html")
