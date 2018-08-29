@@ -88,7 +88,7 @@ request.get(imgURL, function (err, res, body) {
     content: body
   }];
 
-	cloudbackend.sendEmail("john.doe@yopmail.com", "John Doe", "barbara.dess@yopmail.com", "michel.ane@yopmail.com;sarah.croche@yopmail.com;jeremy.sciglio@yopmail.com", "frank.spritz@yopmail.com", "Hello", "How are you?", attachments, false)
+	cloudbackend.sendEmailAdvanced("john.doe@yopmail.com", "John Doe", "barbara.dess@yopmail.com", "michel.ane@yopmail.com;sarah.croche@yopmail.com;jeremy.sciglio@yopmail.com", "frank.spritz@yopmail.com", "Hello", "How are you?", attachments, false)
 	.then(function(response) {
 			console.log(response);
 	});
