@@ -39,7 +39,10 @@ If your are inside a cloud function in CloudBackend, click on the "Open library 
 ## Initialization
 ```
 var cloudbackend = require('appdrag-cloudbackend');
+// INIT FROM CODE VARIABLES
 cloudbackend.init('your_api_key', 'your_app_id');
+// INIT FROM ENVIRONMENT VARIABLES
+cloudbackend.init(process.env.APIKEY, process.env.APPID);
 ```
 
 <br/>
@@ -156,5 +159,5 @@ cloudbackend.directoryDelete("subfolder1")
 # Support
 Post your issues or suggestions here on Github
 
-You can also check our documentation here: 
+You can also check our documentation here:
 https://support.appdrag.com

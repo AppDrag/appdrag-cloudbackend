@@ -1,4 +1,5 @@
 var request = require('request');
+var FormData = require('form-data');
 var APIUrl = 'https://api.appdrag.com/CloudBackend.aspx';
 var APIKey = "";
 var appID = "";
@@ -24,12 +25,30 @@ exports.fileTextWrite = function(filekey, content) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
+  });
+}
+
+exports.fileBinaryWrite = function(filekey, content) {
+
+  return new Promise((resolve, reject) => {
+
+    var form = new FormData();
+    form.append('command', 'WriteBinaryFile');
+    form.append('APIKey', APIKey);
+    form.append('appID', appID);
+    form.append('filekey', filekey);
+    form.append('file', content, {filename : filekey});
+    var resp = form.submit(APIUrl, function (err, res, body) {
+      const chunks = [];
+
+      res.on('data', function(chunk) {
+         var textChunk = chunk.toString('utf8');
+         resolve(textChunk);
+      });
+    });
   });
 }
 
@@ -47,9 +66,6 @@ exports.fileDelete = function (filekey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -71,9 +87,6 @@ exports.fileRename = function (filekey, destkey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -95,9 +108,6 @@ exports.fileCopy = function (filekey, destkey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -120,9 +130,6 @@ exports.fileSaveUploaded = function(filekey, destkey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -144,9 +151,6 @@ exports.directoryCreate = function (directoryName) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -167,9 +171,6 @@ exports.directoryList = function (directoryName) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -191,9 +192,6 @@ exports.directoryRename = function (directoryName, destDirectory) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -214,9 +212,6 @@ exports.directoryDelete = function (directoryName) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -242,9 +237,6 @@ exports.sendEmail = function (from, sender, to, subject, content, isHtml) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -266,9 +258,6 @@ exports.downloadRemoteFile = function (url, filekey) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -288,9 +277,6 @@ exports.sqlSelect = function (query) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
@@ -311,9 +297,6 @@ exports.sqlExecuteRawQuery = function (query) {
         url:APIUrl,
         form: postParameters
       }, function(err,httpResponse,body){
-        if (err) {
-          return reject(err);
-        }
         return resolve(body);
       }
     );
