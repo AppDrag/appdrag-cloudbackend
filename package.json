@@ -1,6 +1,6 @@
 {
   "name": "appdrag-cloudbackend",
-  "version": "2.0.7",
+  "version": "2.1.0",
   "description": "AppDrag CloudBackend SDK for JavaScript",
   "main": "index.js",
   "repository": {
