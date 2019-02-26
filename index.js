@@ -1,5 +1,6 @@
 var request = require('request');
 var APIUrl = 'https://api.appdrag.com/CloudBackend.aspx';
+var APIZapierUrl = 'https://api.appdrag.com/Zapier.aspx';
 var APIKey = "";
 var appID = "";
 
@@ -7,6 +8,125 @@ exports.init = function(_APIKey, _appID) {
   APIKey = _APIKey;
   appID = _appID;
 }
+exports.enableDevMode = function () {
+  APIUrl = 'https://api-dev.appdrag.com/CloudBackend.aspx';
+  APIZapierUrl = 'https://api-dev.appdrag.com/Zapier.aspx';
+}
+
+
+exports.newslettersInsertContactsIntoLists = function(list, contacts) {
+  var mails = '';
+  var firstNames = '';
+  var lastNames = '';
+  contacts.forEach(function (contact) {
+    if (mails != '') {
+      mails += ',';
+      firstNames += ',';
+      lastNames += ',';
+    }
+    mails += contact.email;
+    firstNames += contact.firstName;
+    lastNames += contact.lastName;
+  });
+  return new Promise((resolve, reject) => {
+    var postParameters = {
+        "command" : "NewslettersInsertContactsIntoLists",
+        "APIKey" : APIKey,
+        "appID" : appID,
+        "listsToAdd" : list,
+        "contactsMail" : mails,
+        "contactsFirstName" : firstNames,
+        "contactsLastName" : lastNames,
+    };
+
+    request.post(
+    {
+        url:APIZapierUrl,
+        form: postParameters
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+  });
+}
+
+
+exports.newslettersDeleteList = function(list, contacts) {
+
+  return new Promise((resolve, reject) => {
+    var postParameters = {
+        "command" : "NewslettersDeleteLists",
+        "APIKey" : APIKey,
+        "appID" : appID,
+        "listsToDelete" : list,
+    };
+
+    request.post(
+    {
+        url:APIZapierUrl,
+        form: postParameters
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+  });
+}
+
+
+exports.newslettersGetFailedMail = function(fromDate) {
+  if (typeof(fromDate) == 'undefined') {
+    fromDate = '';
+  }
+
+  return new Promise((resolve, reject) => {
+    var postParameters = {
+        "command" : "NewslettersGetFailedMail",
+        "APIKey" : APIKey,
+        "appID" : appID,
+        "fromDate" : fromDate
+    };
+
+    request.post(
+    {
+        url:APIZapierUrl,
+        form: postParameters
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+  });
+}
+
+
+exports.newslettersDeleteContactsFromLists = function(list, contacts) {
+  var mails = '';
+  contacts.forEach(function (contact) {
+    if (mails != '') {
+      mails += ',';
+    }
+    mails += contact.email;
+  });
+  return new Promise((resolve, reject) => {
+    var postParameters = {
+        "command" : "NewslettersDeleteContactsFromLists",
+        "APIKey" : APIKey,
+        "appID" : appID,
+        "listsToDelete" : list,
+        "contactsMail" : mails,
+    };
+
+    request.post(
+    {
+        url:APIZapierUrl,
+        form: postParameters
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+  });
+}
+
+
 
 exports.fileTextWrite = function(filekey, content) {
 
@@ -27,6 +147,25 @@ exports.fileTextWrite = function(filekey, content) {
         return resolve(body);
       }
     );
+  });
+}
+
+
+exports.fileBinaryWrite = function (filekey, content) {
+  return new Promise((resolve, reject) => {
+    var r = request.post(
+    {
+        url:APIUrl
+      }, function(err,httpResponse,body){
+        return resolve(body);
+      }
+    );
+    var form = r.form();
+    form.append('command', 'WriteBinaryFile');
+    form.append('APIKey', APIKey);
+    form.append('appID', appID);
+    form.append('filekey', filekey);
+    form.append('file', content, {filename : filekey});
   });
 }
 

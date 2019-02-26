@@ -95,6 +95,48 @@ request.get(imgURL, function (err, res, body) {
 });
 ```
 
+### newslettersInsertContactsIntoLists(list, contacts)
+```
+cloudbackend.newslettersInsertContactsIntoLists('my list', [{
+	email : 'john.doe@gmail.com',
+	firstName : 'john',
+	lastName : 'doe'
+	}]).then(
+    function (response) {
+      console.log(response);
+    }
+);
+```
+
+### newslettersDeleteContactsFromLists(list, contacts)
+```
+cloudbackend.newslettersDeleteContactsFromLists('my list', [{
+	email : 'john.doe@gmail.com'
+	}]).then(
+    function (response) {
+      console.log(response);
+    }
+);
+```
+
+### newslettersDeleteList(list, contacts)
+```
+cloudbackend.newslettersDeleteList('my list').then(
+    function (response) {
+      console.log(response);
+    }
+);
+```
+
+### newslettersGetFailedMail(fromDate)
+```
+cloudbackend.newslettersGetFailedMail('2019-01-01').then(
+    function (response) {
+      console.log(response);
+    }
+);
+```
+
 ## Filesystem
 ### fileTextWrite(filekey, content)
 ```
