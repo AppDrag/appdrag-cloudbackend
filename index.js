@@ -354,7 +354,7 @@ exports.directoryDelete = function (directoryName) {
   });
 }
 
-exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, content, attachments, isHtml) {
+exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, content, attachments, isHtml, replyTo) {
   return new Promise((resolve, reject) => {
 
     var r = request.post(
@@ -369,6 +369,9 @@ exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, conten
     form.append('APIKey', APIKey);
     form.append('appID', appID);
     form.append('from', from);
+    if (typeof(replyTo) != "undefined" && replyTo != "") {
+      form.append('replyTo', JSON.stringify(replyTo));
+    }
     form.append('to', to);
     form.append('cc', cc);
     form.append('bcc', bcc);

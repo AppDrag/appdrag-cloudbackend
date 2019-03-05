@@ -76,7 +76,7 @@ cloudbackend.sendEmail("john.doe@yopmail.com", "John Doe", "barbara.dess@yopmail
 });
 ```
 
-### sendEmailAdvanced(from, sender, to, cc, bcc, subject, content, attachments, isHtml)
+### sendEmailAdvanced(from, sender, to, cc, bcc, subject, content, attachments, isHtml, replyTo)
 ```
 var request = require('request').defaults({ encoding: null });
 var imgURL = "https://upload.wikimedia.org/wikipedia/en/0/0b/Nickelodeon_SpongeBob_SquarePants_Characters_Cast.png";
@@ -87,8 +87,12 @@ request.get(imgURL, function (err, res, body) {
     filename : "mypicture.jpg",
     content: body
   }];
+	var replyTo = [{
+		email : "johnny.doe@yopmail.com",
+		name : "Johnny Doe"
+		}];
 
-	cloudbackend.sendEmailAdvanced("john.doe@yopmail.com", "John Doe", "barbara.dess@yopmail.com", "michel.ane@yopmail.com;sarah.croche@yopmail.com;jeremy.sciglio@yopmail.com", "frank.spritz@yopmail.com", "Hello", "How are you?", attachments, false)
+	cloudbackend.sendEmailAdvanced("john.doe@yopmail.com", "John Doe", "barbara.dess@yopmail.com", "michel.ane@yopmail.com;sarah.croche@yopmail.com;jeremy.sciglio@yopmail.com", "frank.spritz@yopmail.com", "Hello", "How are you?", attachments, false, replyTo)
 	.then(function(response) {
 			console.log(response);
 	});

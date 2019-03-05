@@ -16,7 +16,6 @@ appdrag.newslettersGetFailedMail('2019-01-01').then(
     }
 );
 
-
 /*var request = require('request').defaults({ encoding: null });
 var imgURL = "https://upload.wikimedia.org/wikipedia/en/0/0b/Nickelodeon_SpongeBob_SquarePants_Characters_Cast.png";
 var filename = "test22Z.jpg";
