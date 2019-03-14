@@ -369,6 +369,7 @@ exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, conten
     form.append('APIKey', APIKey);
     form.append('appID', appID);
     form.append('from', from);
+    form.append('sender', sender);
     if (typeof(replyTo) != "undefined" && replyTo != "") {
       form.append('replyTo', JSON.stringify(replyTo));
     }
