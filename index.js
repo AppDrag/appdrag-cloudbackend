@@ -1,6 +1,12 @@
-var request = require('request');
+var FormData = require('form-data');
+const axios = require('axios');
 var APIUrl = 'https://api.appdrag.com/CloudBackend.aspx';
 var APIZapierUrl = 'https://api.appdrag.com/Zapier.aspx';
+var config = {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  }
+}
 var APIKey = "";
 var appID = "";
 
@@ -38,13 +44,9 @@ exports.newslettersInsertContactsIntoLists = function(list, contacts) {
         "contactsFirstName" : firstNames,
         "contactsLastName" : lastNames,
     };
-
-    request.post(
-    {
-        url:APIZapierUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIZapierUrl,postParameters,config).then(function(response) {
+        return resolve(response.body);
       }
     );
   });
@@ -60,13 +62,9 @@ exports.newslettersDeleteList = function(list, contacts) {
         "appID" : appID,
         "listsToDelete" : list,
     };
-
-    request.post(
-    {
-        url:APIZapierUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIZapierUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
       }
     );
   });
@@ -86,12 +84,9 @@ exports.newslettersGetFailedMail = function(fromDate) {
         "fromDate" : fromDate
     };
 
-    request.post(
-    {
-        url:APIZapierUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIZapierUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
       }
     );
   });
@@ -115,12 +110,9 @@ exports.newslettersDeleteContactsFromLists = function(list, contacts) {
         "contactsMail" : mails,
     };
 
-    request.post(
-    {
-        url:APIZapierUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIZapierUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
       }
     );
   });
@@ -139,12 +131,9 @@ exports.fileTextWrite = function(filekey, content) {
         "content" : content
     };
 
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
       }
     );
   });
@@ -153,40 +142,35 @@ exports.fileTextWrite = function(filekey, content) {
 
 exports.fileBinaryWrite = function (filekey, content) {
   return new Promise((resolve, reject) => {
-    var r = request.post(
-    {
-        url:APIUrl
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
-    var form = r.form();
+    var form = new FormData();
     form.append('command', 'WriteBinaryFile');
     form.append('APIKey', APIKey);
     form.append('appID', appID);
     form.append('filekey', filekey);
     form.append('file', content, {filename : filekey});
+    axios.post(APIUrl,form, { headers: form.getHeaders() })
+      .then(function (response) {
+          return resolve(response.data);
+    });
   });
 }
-
-exports.fileBinaryWrite = function (filekey, content) {
-  return new Promise((resolve, reject) => {
-    var r = request.post(
-    {
-        url:APIUrl
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
-    var form = r.form();
-    form.append('command', 'WriteBinaryFile');
-    form.append('APIKey', APIKey);
-    form.append('appID', appID);
-    form.append('filekey', filekey);
-    form.append('file', content, {filename : filekey});
-  });
-}
-
+// exports.fileBinaryWrite = function (filekey, content) {
+//   return new Promise((resolve, reject) => {
+//     var r = request.post(
+//     {
+//         url:APIUrl
+//       }, function(err,httpResponse,body){
+//         return resolve(body);
+//       }
+//     );
+//     var form = r.form();
+//     form.append('command', 'WriteBinaryFile');
+//     form.append('APIKey', APIKey);
+//     form.append('appID', appID);
+//     form.append('filekey', filekey);
+//     form.append('file', content, {filename : filekey});
+//   });
+// }
 
 exports.fileDelete = function (filekey) {
   return new Promise((resolve, reject) => {
@@ -196,13 +180,9 @@ exports.fileDelete = function (filekey) {
         "appID" : appID,
         "filekey" : filekey
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIurl,postParameters,config).then(function(response) {
+        return resolve(response.body);
       }
     );
   });
@@ -217,15 +197,10 @@ exports.fileRename = function (filekey, destkey) {
         "filekey" : filekey,
         "destkey" : destkey
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
+    });
   });
 }
 
@@ -238,15 +213,10 @@ exports.fileCopy = function (filekey, destkey) {
         "filekey" : filekey,
         "destkey" : destkey
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    });
   });
 }
 
@@ -260,16 +230,11 @@ exports.fileSaveUploaded = function(filekey, destkey) {
         "filekey" : filekey,
         "destkey" : destkey
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
     });
+  });
 }
 
 
@@ -281,15 +246,10 @@ exports.directoryCreate = function (directoryName) {
         "appID" : appID,
         "directory" : directoryName
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    });
   });
 }
 
@@ -301,15 +261,10 @@ exports.directoryList = function (directoryName) {
         "appID" : appID,
         "directory" : directoryName
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    });
   });
 }
 
@@ -322,15 +277,10 @@ exports.directoryRename = function (directoryName, destDirectory) {
         "directory" : directoryName,
         "destDirectory" : destDirectory
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    });
   });
 }
 
@@ -342,29 +292,16 @@ exports.directoryDelete = function (directoryName) {
         "appID" : appID,
         "directory" : directoryName
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    });
   });
 }
 
 exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, content, attachments, isHtml, replyTo) {
   return new Promise((resolve, reject) => {
-
-    var r = request.post(
-    {
-        url:APIUrl
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
-    var form = r.form();
+    var form = new FormData();
     form.append('command', 'CloudAPISendEmail');
     form.append('APIKey', APIKey);
     form.append('appID', appID);
@@ -383,6 +320,10 @@ exports.sendEmailAdvanced = function (from, sender, to, cc, bcc, subject, conten
       var attachment = attachments[i];
       form.append('file' + i, attachment.content, {filename : attachment.filename});
     }
+    axios.post(APIUrl,form, { headers: form.getHeaders() })
+      .then(function (response) {
+          return resolve(response.data);
+    });
   });
 }
 
@@ -400,15 +341,10 @@ exports.sendEmail = function (from, sender, to, subject, content, isHtml) {
         "content": content,
         "isHtml": isHtml === true ? "1" : "0"
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    });
   });
 }
 
@@ -421,15 +357,10 @@ exports.downloadRemoteFile = function (url, filekey) {
         "url" : url,
         "filekey" : filekey
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
+    });
   });
 }
 exports.sqlSelect = function (query) {
@@ -440,13 +371,9 @@ exports.sqlSelect = function (query) {
         "appID" : appID,
         "query" : query
     };
-
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
+    postParameters = new URLSearchParams(postParameters);
+    axios.post(APIUrl,postParameters,config).then(function(response){
+        return resolve(response.data);
       }
     );
   });
@@ -461,13 +388,9 @@ exports.sqlExecuteRawQuery = function (query) {
         "query" : query
     };
 
-    request.post(
-    {
-        url:APIUrl,
-        form: postParameters
-      }, function(err,httpResponse,body){
-        return resolve(body);
-      }
-    );
+    axios.post(APIUrl,postParameters,config).then(function(response){
+      return resolve(response.data);
+    }
+  );
   });
 }
