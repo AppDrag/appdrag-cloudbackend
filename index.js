@@ -5,7 +5,11 @@ var APIZapierUrl = 'https://api.appdrag.com/Zapier.aspx';
 var config = {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
-  }
+  },
+  transformResponse: (res) => {
+    // Do your own parsing here if needed ie JSON.parse(res);
+    return res;
+  },
 }
 var APIKey = "";
 var appID = "";
@@ -148,7 +152,10 @@ exports.fileBinaryWrite = function (filekey, content) {
     form.append('appID', appID);
     form.append('filekey', filekey);
     form.append('file', content, {filename : filekey});
-    axios.post(APIUrl,form, { headers: form.getHeaders() })
+    axios.post(APIUrl,form, { headers: form.getHeaders(), transformResponse: (res) => {
+      // Do your own parsing here if needed ie JSON.parse(res);
+      return res;
+    }})
       .then(function (response) {
           return resolve(response.data);
     });
@@ -388,6 +395,7 @@ exports.sqlExecuteRawQuery = function (query) {
         "query" : query
     };
 
+    postParameters = new URLSearchParams(postParameters);
     axios.post(APIUrl,postParameters,config).then(function(response){
       return resolve(response.data);
     }
