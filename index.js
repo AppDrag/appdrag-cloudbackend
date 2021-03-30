@@ -188,7 +188,7 @@ exports.fileDelete = function (filekey) {
         "filekey" : filekey
     };
     postParameters = new URLSearchParams(postParameters);
-    axios.post(APIurl,postParameters,config).then(function(response) {
+    axios.post(APIUrl,postParameters,config).then(function(response) {
         return resolve(response.body);
       }
     );
