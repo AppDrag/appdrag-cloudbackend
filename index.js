@@ -1,3 +1,4 @@
+var SqlString = require('sqlstring');
 var FormData = require('form-data');
 const axios = require('axios');
 var APIUrl = 'https://api.appdrag.com/CloudBackend.aspx';
@@ -370,7 +371,17 @@ exports.downloadRemoteFile = function (url, filekey) {
     });
   });
 }
-exports.sqlSelect = function (query) {
+
+exports.escape = function (toEscape) {
+    return SqlString.escape(toEscape);
+}
+
+exports.sqlSelect = function (query, arrayParams) {
+
+  if ( arrayParams != null && arrayParams.length > 0) {
+    query = SqlString.format(query, arrayParams);
+  }
+
   return new Promise((resolve, reject) => {
     var postParameters = {
         "command" : "CloudDBGetDataset",
@@ -386,7 +397,12 @@ exports.sqlSelect = function (query) {
   });
 }
 
-exports.sqlExecuteRawQuery = function (query) {
+exports.sqlExecuteRawQuery = function (query, arrayParams) {
+
+  if ( arrayParams != null && arrayParams.length > 0) {
+    query = SqlString.format(query, arrayParams);
+  }
+
   return new Promise((resolve, reject) => {
     var postParameters = {
         "command" : "CloudDBExecuteRawQuery",

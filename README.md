@@ -48,24 +48,53 @@ cloudbackend.init(process.env.APIKEY, process.env.APPID);
 <br/>
 
 ## SQL
-### sqlSelect(query)
+### sqlSelect(query) - Static query
 ```
 cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = 'Software'")
 .then( function(response) {
-		console.log(response);
+	console.log(response);
 });
 ```
 
-### sqlExecuteRawQuery(query)
+If you want to compose the final SQL query by yourself you must escape the input parameters with cloudbackend.escape() like this:
+
+```
+cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = '" + cloudbackend.escape( event.POST.category ) + "'")
+.then( function(response) {
+	console.log(response);
+});
+```
+
+### sqlSelect(query, arrayOfValues) - Query with parameters (Recommended)
+You can use <b>?</b> characters as placeholders for values you would like to have escaped. Multiple placeholders are mapped to values in the same order as passed.
+
+```
+cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = ? and id > ?", ["Software", 500])
+.then( function(response) {
+	console.log(response);
+});
+```
+
+
+### sqlExecuteRawQuery(query) - Static query
 ```
 cloudbackend.sqlExecuteRawQuery("UPDATE Products SET qty = qty - 1, lastUpdate = NOW() WHERE id = 54").then( function(response) {
-		console.log(response);
+	console.log(response);
+});
+```
+
+### sqlExecuteRawQuery(query, arrayOfValues) - Query with parameters (Recommended)
+```
+cloudbackend.sqlExecuteRawQuery("UPDATE Products SET title = ?, lastUpdate = NOW() WHERE id = ?", ["Great product title", 42]).then( function(response) {
+	console.log(response);
 });
 ```
 
 You can also use sqlExecuteRawQuery to create tables, add an index or anything you can do with a regular MySQL database.
 <br/>
 <br/>
+
+
 
 ## Email
 ### sendEmail(from, sender, to, subject, content, isHtml)

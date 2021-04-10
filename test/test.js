@@ -11,11 +11,13 @@ var process = {
 appdrag.init(process.env.APIKEY, process.env.APPID);
 appdrag.enableDevMode();
 
- /*appdrag.sqlSelect('SELECT * FROM Demo_Users LIMIT 5').then(
+/*
+ appdrag.sqlSelect('SELECT * FROM Leads WHERE id = ? and Field7 = ? LIMIT 5', [1, "Disabled"]).then(
      function (response) {
        console.log(JSON.parse(response).Table);
      }
- );*/
+ );
+ */
 
  /*appdrag.sqlExecuteRawQuery(`INSERT INTO Demo_Users (email) VALUES ('oui')`).then(
   function (response) {
