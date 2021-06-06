@@ -59,7 +59,7 @@ cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = 'Software'")
 If you want to compose the final SQL query by yourself you must escape the input parameters with cloudbackend.escape() like this:
 
 ```
-cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = '" + cloudbackend.escape( event.POST.category ) + "'")
+cloudbackend.sqlSelect("SELECT * FROM Products WHERE category = " + cloudbackend.escape( event.POST.category ))
 .then( function(response) {
 	console.log(response);
 });

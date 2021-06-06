@@ -11,6 +11,8 @@ var process = {
 appdrag.init(process.env.APIKEY, process.env.APPID);
 appdrag.enableDevMode();
 
+console.log("SELECT * FROM Products WHERE category = " + appdrag.escape('MyCat1') + " AND id < " + 2345);
+
 /*
  appdrag.sqlSelect('SELECT * FROM Leads WHERE id = ? and Field7 = ? LIMIT 5', [1, "Disabled"]).then(
      function (response) {
