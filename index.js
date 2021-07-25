@@ -379,7 +379,7 @@ exports.escape = function (toEscape) {
 exports.sqlSelect = function (query, arrayParams) {
 
   if ( arrayParams != null && arrayParams.length > 0) {
-    query = SqlString.format(query, arrayParams);
+    query = SqlString.format(query, arrayParams).replace(/\\'/g, "''");
   }
 
   return new Promise((resolve, reject) => {
@@ -400,7 +400,7 @@ exports.sqlSelect = function (query, arrayParams) {
 exports.sqlExecuteRawQuery = function (query, arrayParams) {
 
   if ( arrayParams != null && arrayParams.length > 0) {
-    query = SqlString.format(query, arrayParams);
+    query = SqlString.format(query, arrayParams).replace(/\\'/g, "''");
   }
 
   return new Promise((resolve, reject) => {
